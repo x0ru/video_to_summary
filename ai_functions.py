@@ -15,12 +15,16 @@ def summary_2():
         messages=[
             {
                 "role": "system",
-                "content": "You are a highly skilled AI trained in language comprehension and summarization. "
-                           "I would like you to read the following text and summarize it into a concise "
-                           "abstract paragraph. Aim to retain the most important points, providing a coherent and "
+                "content": "Don't mention it is based on text.You are a highly skilled AI trained in "
+                           "language comprehension and summarization. "
+                           "I would like you to read the following text which is based on video "
+                           "and summarize it into a concise "
+                           "abstract paragraph. Don't mention it is based on text. Try to describe author of text."
+                           "Aim to retain the most important points, providing a coherent and "
                            "readable summary that could help a person understand the main points of the discussion "
                            "without needing to read the entire text. Please avoid unnecessary details or tangential "
-                           "points."
+                           "points.Don't include anything about sponsor of video and advertisement "
+                                      "included in text"
             },
             {
                 "role": "user",
@@ -37,12 +41,14 @@ def summary():
       model="gpt-3.5-turbo-0125",
       messages=[
         {"role": "system", "content": "You are a proficient AI with a specialty in distilling information into key "
-                                      "points. " "Based on the following text, identify and list the main points that"
+                                      "points. " "Based on the following text which is based on video, "
+                                      "identify and list the main points that"
                                       " were"
                                       " discussed or brought up. These should be the most important ideas, findings, "
                                       "or topics that are crucial to the essence of the discussion. Your goal is to"
                                       " provide a list that someone could read to quickly understand what was "
-                                      "talked about."},
+                                      "talked about. Don't include anything about sponsor of video and advertisement "
+                                      "included in text"},
         {"role": "user", "content": f'{download_subtitles.give_me_subs()}'}
       ]
     )
