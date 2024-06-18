@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect,url_for, session, request
+from flask import Flask, render_template
 import secrets
 from wtforms import URLField
 from flask_wtf import FlaskForm, CSRFProtect
@@ -21,9 +21,13 @@ class PasteVideo(FlaskForm):
 def index():
     form = PasteVideo()
     if form.validate_on_submit():
-        download_subtitles.download_sub(form.video_link.data)
-        summary = ai_functions.summary()
-        return render_template('ulala.html', summary=summary)
+        try:
+            download_subtitles.download_sub(form.video_link.data)
+            summary = ai_functions.summary().split('\n')
+            summary2 = ai_functions.summary_2()
+        except FileNotFoundError:
+            return render_template('fail.html')
+        return render_template('ulala.html', summary=summary, summary2=summary2)
     return render_template('index.html', form=form)
 
 

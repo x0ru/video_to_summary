@@ -21,12 +21,11 @@ def give_me_subs():
         new_text = ""
         for i in range(3):
             next(f)
-        for line in f:
-            subtitle_generator = srt.parse(f)
-            subtitles = list(subtitle_generator)
-            for sub in subtitles:
-                if "<" not in sub.content:
-                    new_text += sub.content
+        subtitle_generator = srt.parse(f)
+        subtitles = list(subtitle_generator)
+        for sub in subtitles:
+            if "<" not in sub.content:
+                new_text += sub.content
 
     return new_text
 
