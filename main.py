@@ -6,6 +6,7 @@ from flask_executor import Executor
 import ai_functions
 import download_subtitles
 
+
 app = Flask(__name__)
 foo = secrets.token_urlsafe(16)
 app.secret_key = 'gmbnvmmvm'
