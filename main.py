@@ -21,12 +21,7 @@ class PasteVideo(FlaskForm):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    form = PasteVideo()
-    if form.validate_on_submit():
-        download_subtitles.download_sub(form.video_link.data)
-        summary = ai_functions.summary()
-        return render_template('ulala.html', summary=summary)
-    return render_template('index.html', form=form)
+    return render_template('index.html')
 
 
 if __name__ == "__main__":
