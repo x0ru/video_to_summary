@@ -3,6 +3,9 @@
 <meta charset="UTF-8">
 <title>Page Title</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+
+
 <link rel="stylesheet" href="">
 <style>
 
@@ -37,31 +40,34 @@ display: none;
 </div>
 </div>
 
- <form  method="post">
+ <form  method="post" id="emit">
   {{ form.csrf_token }}
   {{ form.video_link }}
      {{ form.submit(onmousedown="myFunction()") }}
  </form>
-
+<div class="messages" style="height: 500px; width:500px; background-color:red;">
 {{ request.method == 'POST' }}
 
 {% if form.video_link.data is not none %}
  <p>We are processing video</p>
 {% endif %}
 <br>
-
+<div id="log"></div>
 <script>
+let messageContainer = document.querySelector(".messages");
 
-function myFunction() {
-  var x = document.getElementById("myDIV");
-  if (x.style.display === "none") {
-    x.style.display = "none";
-  } else {
-    x.style.display = "block";
-  }
-}
-    </script>
+ socket = io();
+ socket.on('connect', function(){
+ socket.send('a')
+ })
 
-
+ socket.on('message', function(msg) {
+        let messageElement = document.createElement("p")
+        messageElement.innerText = msg
+        console.log(msg)
+        messageContainer.appendChild(messageElement)
+        socket.send('a')
+    })
+</script>
 </body>
 </html>
