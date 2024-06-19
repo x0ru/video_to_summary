@@ -46,49 +46,39 @@ display: none;
 
  <form  method="post" id="theForm">
   {{ form.csrf_token }}
-  {{ form.video_link }}
-  <button popovertarget="myheader" type="button" id="something">Click Me!</button>
-  <button popovertarget="myheader"  type="submit" id="myCheck">Click Me!</button>
-     {{ form.submit() }}
-
+  {{ form.video_link(id="numb")}}
+  <button type="button" onclick="myFunction()">Submit</button>
+  <p id="demo"></p>
  </form>
-<div class="messages" style="height: 500px; width:500px; background-color:red;">
-{{ request.method == 'POST' }}
-
 {% if form.video_link.data is not none %}
- <p>We are processing video</p>
+<h2> Title</h2>
+{% for line in summary %}
+<p>{{ line }}</p>
+{% endfor %}
+
+<h2> Title2</h2>
+<p>{{ summary2 }}</p>
 {% endif %}
-
-
 <script>
-let messageContainer = document.querySelector(".messages");
-
- socket = io();
- socket.on('connect', function(){
- socket.send('a')
- })
-
- socket.on('message', function(msg) {
-        let messageElement = document.createElement("p")
-        messageElement.innerText = msg
-        console.log(msg)
-        messageContainer.appendChild(messageElement)
-        socket.send('a')
-    })
-
-    function myFunction() {
-  var x = document.getElementById("myDIV");
-  if (x.style.display === "none") {
-    x.style.display = "none";
+function myFunction() {
+  // Get the value of the input field with id="numb"
+  let x = document.getElementById("numb").value;
+  // If x is Not a Number or less than one or greater than 10
+  let text;
+  let result = x.includes("https://www.youtube.com/watch?");
+  let result1 = x.includes("https://youtu.be");
+  console.log(x)
+  console.log(result)
+  console.log(result1)
+  if ((result || result1) != true) {
+    text = "Input not valid";
   } else {
-    x.style.display = "block";
+    document.getElementById('theForm').submit();
+
   }
+  document.getElementById("demo").innerHTML = text;
 }
 
-$('#something').click(function() {
-    setTimeout(myFunction, 3000);
-    document.getElementById("myCheck").click();
-});
 </script>
 
 

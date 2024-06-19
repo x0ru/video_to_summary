@@ -1,6 +1,6 @@
 import time
 from flask import Flask, render_template, redirect, flash, url_for, session, request
-from wtforms import URLField, SubmitField
+from wtforms import URLField, SubmitField, StringField
 from flask_wtf import FlaskForm, CSRFProtect
 from wtforms.validators import InputRequired
 import ai_functions
@@ -16,7 +16,7 @@ socket = SocketIO(app)
 
 
 class PasteVideo(FlaskForm):
-    video_link = URLField('here link please', validators=[InputRequired()])
+    video_link = StringField('here link please', validators=[InputRequired()])
     submit = SubmitField('Submit')
 
 
@@ -24,10 +24,15 @@ class PasteVideo(FlaskForm):
 def index():
     form = PasteVideo()
     if request.method == 'POST' and form.validate_on_submit():
-        session['data'] = form.video_link.data
-        return redirect(url_for('result'))
-    return render_template('index.html', form=form)
-
+        try:
+            download_subtitles.download_sub(form.video_link.data)
+            session.pop('data', None)
+            summary = ai_functions.summary().split('\n')
+            summary2 = ai_functions.summary_2()
+        except FileNotFoundError:
+            return render_template('fail.html')
+        return render_template('index.html', form=form, summary=summary, summary2=summary2)
+    return render_template('index.html', form=form, summary='', summary2='')
 
 
 @app.route('/result')
