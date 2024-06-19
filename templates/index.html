@@ -3,19 +3,6 @@
 <meta charset="UTF-8">
 <title>Page Title</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
-<script>
- socket = io();
- socket.connect('http://127.0.0.1:5555/');
- socket.on('connect', function(){
- socket.send('a')
- })
- socket.on('message', function(msg){
- console.log(msg);
- socket.send('a');
- })
-</script>
-
 <link rel="stylesheet" href="">
 <style>
 
@@ -50,7 +37,7 @@ display: none;
 </div>
 </div>
 
- <form  method="post" id="emit">
+ <form  method="post">
   {{ form.csrf_token }}
   {{ form.video_link }}
      {{ form.submit(onmousedown="myFunction()") }}
@@ -62,8 +49,18 @@ display: none;
  <p>We are processing video</p>
 {% endif %}
 <br>
-<div id="log"></div>
 
+<script>
+
+function myFunction() {
+  var x = document.getElementById("myDIV");
+  if (x.style.display === "none") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "block";
+  }
+}
+    </script>
 
 
 </body>
