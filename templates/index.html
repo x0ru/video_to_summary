@@ -3,28 +3,68 @@
 <meta charset="UTF-8">
 <title>Page Title</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+<script>
+ socket = io();
+ socket.connect('http://127.0.0.1:5555/');
+ socket.on('connect', function(){
+ socket.send('a')
+ })
+ socket.on('message', function(msg){
+ console.log(msg);
+ socket.send('a');
+ })
+</script>
+
 <link rel="stylesheet" href="">
 <style>
+
+#myDIV {
+display: none;
+}
+#spinning{
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite; /* Safari */
+  animation: spin 2s linear infinite;
+}
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
 </style>
-<script src=""></script>
 <body>
 
-{% with messages = get_flashed_messages()%}
-{% if messages%}
-    {% for message in messages%}
-    <p>{{message}}</p>
-    {%endfor%}
-    {%endif%}
-    {%endwith%}
+<div id="myDIV">We are working on it
+<div id="spinning">
 
- <form  method="post">
+</div>
+</div>
+
+ <form  method="post" id="emit">
   {{ form.csrf_token }}
   {{ form.video_link }}
+     {{ form.submit(onmousedown="myFunction()") }}
  </form>
+
+{{ request.method == 'POST' }}
 
 {% if form.video_link.data is not none %}
  <p>We are processing video</p>
 {% endif %}
+<br>
+<div id="log"></div>
+
+
 
 </body>
 </html>

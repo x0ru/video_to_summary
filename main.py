@@ -1,29 +1,33 @@
-from flask import Flask, render_template, redirect, flash, url_for, session
-from wtforms import URLField
+import time
+from flask import Flask, render_template, redirect, flash, url_for, session, request
+from wtforms import URLField, SubmitField
 from flask_wtf import FlaskForm, CSRFProtect
+from wtforms.validators import InputRequired
 import ai_functions
 import download_subtitles
 import secrets
-from flask_executor import Executor
+from flask_socketio import SocketIO, emit, send
 
 app = Flask(__name__)
 foo = secrets.token_urlsafe(16)
 app.secret_key = 'gmbnvmmvm'
 csrf = CSRFProtect(app)
-executor = Executor(app)
+socket = SocketIO(app)
+
 
 class PasteVideo(FlaskForm):
-    video_link = URLField("Please paste your video link")
-
+    video_link = URLField('here link please', validators=[InputRequired()])
+    submit = SubmitField('Submit')
 
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
     form = PasteVideo()
-    if form.validate_on_submit():
+    if request.method == 'POST' and form.validate_on_submit():
         session['data'] = form.video_link.data
         return redirect(url_for('result'))
     return render_template('index.html', form=form)
+
 
 
 @app.route('/result')
@@ -37,7 +41,16 @@ def result():
         return render_template('fail.html')
     return render_template('ulala.html', summary=summary, summary2=summary2)
 
+i= 0
+
+somelist = ['apple','nana', 'czort']
+@socket.on('message')
+def handlemsg(msg):
+    global i
+    if i < len(somelist):
+        send(somelist[i])
+        i += 1
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    socket.run(app, allow_unsafe_werkzeug=True, port=5555, debug=True)
