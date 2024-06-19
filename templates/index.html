@@ -3,6 +3,7 @@
 <meta charset="UTF-8">
 <title>Page Title</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="static/styles.css">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
@@ -33,52 +34,63 @@ display: none;
 }
 </style>
 <body>
-<h1 popover id="myheader">Hello</h1>
 
 
 
 
-<div id="myDIV">We are working on it
-<div id="spinning">
 
-</div>
-</div>
 
  <form  method="post" id="theForm">
   {{ form.csrf_token }}
   {{ form.video_link(id="numb")}}
-  <button type="button" onclick="myFunction()">Submit</button>
-  <p id="demo"></p>
+  <button type="button" onclick="myFunction(); move();">Submit</button>
+  <p id="validation"></p>
  </form>
-{% if form.video_link.data is not none %}
-<h2> Title</h2>
-{% for line in summary %}
-<p>{{ line }}</p>
-{% endfor %}
 
-<h2> Title2</h2>
-<p>{{ summary2 }}</p>
-{% endif %}
+<div class="progress-container" id="myDIV">
+  <div class="progress"></div>
+</div>
+
 <script>
 function myFunction() {
-  // Get the value of the input field with id="numb"
+  var y = document.getElementById("myDIV");
   let x = document.getElementById("numb").value;
-  // If x is Not a Number or less than one or greater than 10
   let text;
   let result = x.includes("https://www.youtube.com/watch?");
   let result1 = x.includes("https://youtu.be");
-  console.log(x)
-  console.log(result)
-  console.log(result1)
+
   if ((result || result1) != true) {
     text = "Input not valid";
   } else {
+    text = "Analyzing video";
+    y.style.display = "block";
     document.getElementById('theForm').submit();
 
   }
-  document.getElementById("demo").innerHTML = text;
+  document.getElementById("validation").innerHTML = text;
 }
 
+const progressbar = document.querySelector(".progress");
+
+const changeProgress = (progress) => {
+  progressbar.style.width = `${progress}%`;
+  if (progress === 39) {
+  document.getElementById("validation").innerHTML = 'Finding most important facts';
+  }
+  if (progress === 69) {
+  document.getElementById("validation").innerHTML = 'Final touch';
+  }
+};
+
+/* change progress after 1 second (only for showcase) */
+setTimeout(() => changeProgress(5), 2000);
+setTimeout(() => changeProgress(22), 4600);
+setTimeout(() => changeProgress(33), 5266);
+setTimeout(() => changeProgress(39), 8000);
+setTimeout(() => changeProgress(55), 10000);
+setTimeout(() => changeProgress(69), 11200);
+setTimeout(() => changeProgress(81), 12500);
+setTimeout(() => changeProgress(100), 13200);
 </script>
 
 

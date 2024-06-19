@@ -24,15 +24,10 @@ class PasteVideo(FlaskForm):
 def index():
     form = PasteVideo()
     if request.method == 'POST' and form.validate_on_submit():
-        try:
-            download_subtitles.download_sub(form.video_link.data)
-            session.pop('data', None)
-            summary = ai_functions.summary().split('\n')
-            summary2 = ai_functions.summary_2()
-        except FileNotFoundError:
-            return render_template('fail.html')
-        return render_template('index.html', form=form, summary=summary, summary2=summary2)
-    return render_template('index.html', form=form, summary='', summary2='')
+        session['data'] = form.video_link.data
+        return redirect(url_for('result'))
+    return render_template('index.html', form=form)
+
 
 
 @app.route('/result')
@@ -44,7 +39,7 @@ def result():
         summary2 = ai_functions.summary_2()
     except FileNotFoundError:
         return render_template('fail.html')
-    return render_template('ulala.html', summary=summary, summary2=summary2)
+    return render_template('result.html', summary=summary, summary2=summary2)
 
 
 # @socket.on('message')
