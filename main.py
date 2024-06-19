@@ -41,15 +41,13 @@ def result():
         return render_template('fail.html')
     return render_template('ulala.html', summary=summary, summary2=summary2)
 
-i= 0
 
-somelist = ['apple','nana', 'czort']
-@socket.on('message')
-def handlemsg(msg):
-    global i
-    if i < len(somelist):
-        send(somelist[i])
-        i += 1
+# @socket.on('message')
+# def handlemsg(msg):
+#     form = PasteVideo()
+#     if form.video_link.data is not None:
+#         send("yo")
+
 
 
 if __name__ == "__main__":

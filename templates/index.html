@@ -4,7 +4,7 @@
 <title>Page Title</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
 
 <link rel="stylesheet" href="">
 <style>
@@ -33,6 +33,10 @@ display: none;
 }
 </style>
 <body>
+<h1 popover id="myheader">Hello</h1>
+
+
+
 
 <div id="myDIV">We are working on it
 <div id="spinning">
@@ -40,10 +44,13 @@ display: none;
 </div>
 </div>
 
- <form  method="post" id="emit">
+ <form  method="post" id="theForm">
   {{ form.csrf_token }}
   {{ form.video_link }}
-     {{ form.submit(onmousedown="myFunction()") }}
+  <button popovertarget="myheader" type="button" id="something">Click Me!</button>
+  <button popovertarget="myheader"  type="submit" id="myCheck">Click Me!</button>
+     {{ form.submit() }}
+
  </form>
 <div class="messages" style="height: 500px; width:500px; background-color:red;">
 {{ request.method == 'POST' }}
@@ -51,8 +58,8 @@ display: none;
 {% if form.video_link.data is not none %}
  <p>We are processing video</p>
 {% endif %}
-<br>
-<div id="log"></div>
+
+
 <script>
 let messageContainer = document.querySelector(".messages");
 
@@ -68,6 +75,22 @@ let messageContainer = document.querySelector(".messages");
         messageContainer.appendChild(messageElement)
         socket.send('a')
     })
+
+    function myFunction() {
+  var x = document.getElementById("myDIV");
+  if (x.style.display === "none") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "block";
+  }
+}
+
+$('#something').click(function() {
+    setTimeout(myFunction, 3000);
+    document.getElementById("myCheck").click();
+});
 </script>
+
+
 </body>
 </html>
