@@ -14,10 +14,9 @@ def splitting_tasks(all_text):
     for split_text in all_text:
         summary += summary_paragraph(split_text)
         summary2 += summary_key_points(split_text)
+    os.remove('sub.srt.en.vtt')
     if len(all_text) == 1:
         return [summary, summary2.split('\n')]
-    print(summary)
-    os.remove('sub.srt.en.vtt')
     return [summary_paragraph(summary), summary_key_points(summary2).split('\n')]
 
 

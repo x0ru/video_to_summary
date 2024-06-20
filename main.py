@@ -8,6 +8,12 @@ import download_subtitles
 import secrets
 
 
+# TODO: 1. Create history of searches. Last 3 searches can be stored in memory. << this maybe with point 5
+#       2. Do example so people can see random links for video.
+#       3. Embedd video.
+#       4. Progress bar.
+#       5. Account handling + db wit last searches ? So this way we can see history.
+
 app = Flask(__name__)
 foo = secrets.token_urlsafe(16)
 app.secret_key = 'gmbnvmmvm'
