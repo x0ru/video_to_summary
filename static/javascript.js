@@ -37,3 +37,28 @@ setTimeout(() => changeProgress(55), 10000);
 setTimeout(() => changeProgress(69), 11200);
 setTimeout(() => changeProgress(81), 12500);
 setTimeout(() => changeProgress(100), 13200);
+
+
+function copyText() {
+
+            /* Select text area by id*/
+            var Text = document.getElementById("textbox").textContent;
+
+            /* Select the text inside text area. */
+            console.log(Text);
+            /* Copy selected text into clipboard */
+            navigator.clipboard.writeText(Text);
+
+        }
+
+function copyText2() {
+
+            /* Select text area by id*/
+            var Text = document.getElementById("textbox2").textContent;
+
+            /* Select the text inside text area. */
+            console.log(Text);
+            /* Copy selected text into clipboard */
+            navigator.clipboard.writeText(Text);
+
+        }

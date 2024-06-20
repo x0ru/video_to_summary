@@ -1,23 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<meta charset="UTF-8">
-<title>Page Title</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="stylesheet" href="">
-<style>
-</style>
-<script src=""></script>
-<body>
+{% extends 'base.html' %}
 
+
+{% block content %}
 <p>ulala</p>
 
+<div id="textbox">
 <h2> Title</h2>
 {% for line in summary %}
 <p>{{ line }}</p>
 {% endfor %}
+    </div>
+<button onclick="copyText()">Copy</button>
 
 <h2> Title2</h2>
-<p>{{ summary2 }}</p>
-</body>
+<p id="textbox2">{{ summary2 }}</p>
+<button onclick="copyText2()">Copy</button>
 
-</html>
+{% endblock %}
