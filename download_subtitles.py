@@ -12,7 +12,10 @@ def download_sub(url):
     }
 
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-        ydl.download([url])
+        try:
+            ydl.download([url])
+        except:
+            return False
 
 
 

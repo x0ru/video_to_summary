@@ -33,7 +33,8 @@ def index():
 @app.route('/result')
 def result():
     try:
-        download_subtitles.download_sub(session["data"])
+        if download_subtitles.download_sub(session["data"]) == False:
+            print('We cant process this link')
         session.pop('data', None)
         summary = ai_functions.summary().split('\n')
         summary2 = ai_functions.summary_2()

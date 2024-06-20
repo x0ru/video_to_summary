@@ -1,98 +1,16 @@
-<!DOCTYPE html>
-<html lang="en">
-<meta charset="UTF-8">
-<title>Page Title</title>
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="stylesheet" href="static/styles.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
-<link rel="stylesheet" href="">
-<style>
-
-#myDIV {
-display: none;
-}
-#spinning{
-  border: 16px solid #f3f3f3;
-  border-radius: 50%;
-  border-top: 16px solid #3498db;
-  width: 120px;
-  height: 120px;
-  -webkit-animation: spin 2s linear infinite; /* Safari */
-  animation: spin 2s linear infinite;
-}
-/* Safari */
-@-webkit-keyframes spin {
-  0% { -webkit-transform: rotate(0deg); }
-  100% { -webkit-transform: rotate(360deg); }
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-</style>
-<body>
+{% extends 'base.html' %}
 
 
-
-
-
-
+{% block content %}
  <form  method="post" id="theForm">
   {{ form.csrf_token }}
   {{ form.video_link(id="numb")}}
-  <button type="button" onclick="myFunction(); move();">Submit</button>
+  <button type="button" onmousedown="myFunction(); move();">Submit</button>
   <p id="validation"></p>
  </form>
 
 <div class="progress-container" id="myDIV">
-  <div class="progress"></div>
+  <div class="progress">0</div>
 </div>
 
-<script>
-function myFunction() {
-  var y = document.getElementById("myDIV");
-  let x = document.getElementById("numb").value;
-  let text;
-  let result = x.includes("https://www.youtube.com/watch?");
-  let result1 = x.includes("https://youtu.be");
-
-  if ((result || result1) != true) {
-    text = "Input not valid";
-  } else {
-    text = "Analyzing video";
-    y.style.display = "block";
-    document.getElementById('theForm').submit();
-
-  }
-  document.getElementById("validation").innerHTML = text;
-}
-
-const progressbar = document.querySelector(".progress");
-
-const changeProgress = (progress) => {
-  progressbar.style.width = `${progress}%`;
-  if (progress === 39) {
-  document.getElementById("validation").innerHTML = 'Finding most important facts';
-  }
-  if (progress === 69) {
-  document.getElementById("validation").innerHTML = 'Final touch';
-  }
-};
-
-/* change progress after 1 second (only for showcase) */
-setTimeout(() => changeProgress(5), 2000);
-setTimeout(() => changeProgress(22), 4600);
-setTimeout(() => changeProgress(33), 5266);
-setTimeout(() => changeProgress(39), 8000);
-setTimeout(() => changeProgress(55), 10000);
-setTimeout(() => changeProgress(69), 11200);
-setTimeout(() => changeProgress(81), 12500);
-setTimeout(() => changeProgress(100), 13200);
-</script>
-
-
-</body>
-</html>
+ {% endblock %}
