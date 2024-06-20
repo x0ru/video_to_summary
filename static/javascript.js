@@ -10,6 +10,16 @@ function myFunction() {
   } else {
     text = "";
     y.style.display = "block";
+    /* change progress after 1 second (only for showcase) */
+    setTimeout(() => changeProgress(16), 1500);
+    setTimeout(() => changeProgress(23), 2600);
+    setTimeout(() => changeProgress(28), 4600);
+    setTimeout(() => changeProgress(33), 5266);
+    setTimeout(() => changeProgress(39), 7200);
+    setTimeout(() => changeProgress(55), 9000);
+    setTimeout(() => changeProgress(69), 10500);
+    setTimeout(() => changeProgress(81), 12500);
+    setTimeout(() => changeProgress(100), 13200);
     document.getElementById('theForm').submit();
 
 
@@ -20,6 +30,7 @@ function myFunction() {
 const progressbar = document.querySelector(".progress");
 
 const changeProgress = (progress) => {
+console.log(progress)
   progressbar.style.width = `${progress}%`;
   if (progress === 0) {
   document.getElementById("bar-description").innerHTML = 'We are processing your video';
@@ -32,17 +43,7 @@ const changeProgress = (progress) => {
   }
 };
 
-/* change progress after 1 second (only for showcase) */
-setTimeout(() => changeProgress(0), 0300);
-setTimeout(() => changeProgress(16), 2600);
-setTimeout(() => changeProgress(22), 4600);
-setTimeout(() => changeProgress(33), 5266);
-setTimeout(() => changeProgress(39), 8000);
-setTimeout(() => changeProgress(55), 10000);
-setTimeout(() => changeProgress(69), 11200);
-setTimeout(() => changeProgress(81), 12500);
-setTimeout(() => changeProgress(100), 13800);
-setTimeout(() => changeProgress(0), 20000);
+
 
 
 function copyText() {

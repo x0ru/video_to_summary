@@ -22,6 +22,7 @@ def download_sub(url):
 def give_me_subs():
     with open('sub.srt.en.vtt') as f:
         new_text = ""
+        all_text = []
         for i in range(3):
             next(f)
         subtitle_generator = srt.parse(f)
@@ -29,7 +30,11 @@ def give_me_subs():
         for sub in subtitles:
             if "<" not in sub.content:
                 new_text += sub.content
+                if len(new_text) > 50000:
+                    all_text.append(new_text)
+                    new_text = ''
+        all_text.append(new_text)
 
-    return new_text
+    return all_text
 
 

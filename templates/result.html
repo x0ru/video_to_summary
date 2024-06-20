@@ -3,30 +3,18 @@
 
 {% block content %}
 
-<form  method="post" id="theForm">
-  {{ form.csrf_token }}
-  {{ form.video_link(id="numb")}}
-  <button type="button" onmousedown="myFunction(); move();">Submit</button>
-  <p id="validation"></p>
- </form>
-
-<div id="myDIV">
-<h3 id="bar-description">We are processing your video</h3>
-<div class="progress-container">
-  <div class="progress"></div>
-</div>
-</div>
+<a href="{{url_for('index')}}" >Index</a>
 
 <div id="textbox">
 <h2> Title</h2>
-{% for line in summary %}
+{% for line in summary2 %}
 <p>{{ line }}</p>
 {% endfor %}
-    </div>
+</div>
 <button onclick="copyText()">Copy</button>
 
 <h2> Title2</h2>
-<p id="textbox2">{{ summary2 }}</p>
+<p id="textbox2">{{ summary }}</p>
 <button onclick="copyText2()">Copy</button>
 
 {% endblock %}

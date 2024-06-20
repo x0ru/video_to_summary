@@ -31,28 +31,25 @@ def index():
 
 @app.route('/result', methods=['GET', 'POST'])
 def result():
-    form = PasteVideo()
-    if request.method == 'POST' and form.validate_on_submit():
-        session['data'] = form.video_link.data
     if "data" in session.keys():
         try:
             time_start = time.time()
             download_subtitles.download_sub(session["data"])
             session.pop('data', None)
-            summary = ai_functions.summary().split('\n')
-            summary2 = ai_functions.summary_2()
+            summary, summary2 = ai_functions.splitting_tasks(download_subtitles.give_me_subs())
             session['summary'] = summary
             session['summary2'] = summary2
             time_stop = time.time()
             time_diff = time_stop - time_start
-            if time_diff < float(12.2):
-                print(12.2 - time_diff, "sleeping")
-                time.sleep(12.2 - time_diff)
+            print(time_diff)
+            if time_diff < float(13.8):
+                print(13.8 - time_diff, "sleeping")
+                time.sleep(13.8 - time_diff)
         except FileNotFoundError:
             return render_template('fail.html')
-        return render_template('result.html', form=form, summary=summary, summary2=summary2)
+        return render_template('result.html', summary=summary, summary2=summary2)
     if "summary" in session.keys():
-        return render_template('result.html', form=form, summary=session['summary'], summary2=session['summary2'])
+        return render_template('result.html', summary=session['summary'], summary2=session['summary2'])
     else:
         return redirect(url_for('index'))
 
