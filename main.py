@@ -10,7 +10,6 @@ import secrets
 
 # TODO: 1. Create history of searches. Last 3 searches can be stored in memory. << this maybe with point 5
 #       2. Do example so people can see random links for video.
-#       3. Embedd video.
 #       4. Progress bar.
 #       5. Account handling + db wit last searches ? So this way we can see history.
 
@@ -25,11 +24,21 @@ class PasteVideo(FlaskForm):
     submit = SubmitField('Submit')
 
 
+def extracting_yt_link(link):
+    if 'https://www.youtube.com/watch?v=' in link:
+        end_for_embed = link.split('=')[1]
+    elif 'https://youtu.be/' in link:
+        end_for_embed = link.split('.be/')[1].split('?')[0]
+    else:
+        end_for_embed = "dQw4w9WgXcQ"
+    return end_for_embed
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     form = PasteVideo()
     if request.method == 'POST' and form.validate_on_submit():
         session['data'] = form.video_link.data
+        session['end_for_embed'] = extracting_yt_link(session['data'])
         return redirect(url_for('result'))
     return render_template('index.html', form=form)
 
@@ -40,8 +49,8 @@ def result():
     if "data" in session.keys():
         try:
             time_start = time.time()
+            end_for_embed = session['end_for_embed']
             download_subtitles.download_sub(session["data"])
-            session.pop('data', None)
             summary, summary2 = ai_functions.splitting_tasks(download_subtitles.give_me_subs())
             session['summary'] = summary
             session['summary2'] = summary2
@@ -53,9 +62,11 @@ def result():
                 time.sleep(13.8 - time_diff)
         except FileNotFoundError:
             return render_template('fail.html')
-        return render_template('result.html', summary=summary, summary2=summary2)
+        return render_template('result.html', summary=summary, summary2=summary2, end_for_embed=end_for_embed)
     if "summary" in session.keys():
-        return render_template('result.html', summary=session['summary'], summary2=session['summary2'])
+        end_for_embed = session['end_for_embed']
+        return render_template('result.html', summary=session['summary'], summary2=session['summary2'],
+                               end_for_embed=end_for_embed)
     else:
         return redirect(url_for('index'))
 
