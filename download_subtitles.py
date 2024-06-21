@@ -35,6 +35,6 @@ def give_me_subs():
                     new_text = ''
         all_text.append(new_text)
 
-    return all_text
+    return all_text, len(all_text)
 
 

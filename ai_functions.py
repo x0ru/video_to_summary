@@ -8,7 +8,6 @@ client = OpenAI(
 )
 
 def splitting_tasks(all_text):
-    print(len(all_text))
     summary = ''
     summary2 = ''
     for split_text in all_text:

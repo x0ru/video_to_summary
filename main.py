@@ -24,6 +24,8 @@ class PasteVideo(FlaskForm):
     submit = SubmitField('Submit')
 
 
+all_text =[]
+
 def extracting_yt_link(link):
     if 'https://www.youtube.com/watch?v=' in link:
         end_for_embed = link.split('=')[1]
@@ -35,31 +37,38 @@ def extracting_yt_link(link):
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
+    global all_text
+    session['len_all_text'] = 1
     form = PasteVideo()
     if request.method == 'POST' and form.validate_on_submit():
         session['data'] = form.video_link.data
         session['end_for_embed'] = extracting_yt_link(session['data'])
+        download_subtitles.download_sub(session["data"])
+        all_text, session['len_all_text'] = download_subtitles.give_me_subs()
         return redirect(url_for('result'))
     return render_template('index.html', form=form)
 
 
+@app.route("/track", methods=["GET"])
+def track():
+    print(session['len_all_text'], "this is one returning from function track")
+    return str(session['len_all_text'])
+
 
 @app.route('/result', methods=['GET', 'POST'])
 def result():
+    global all_text
     if "data" in session.keys():
         try:
+            print(session['len_all_text'], "this is one returning from function result at the beginning of try")
             time_start = time.time()
             end_for_embed = session['end_for_embed']
-            download_subtitles.download_sub(session["data"])
-            summary, summary2 = ai_functions.splitting_tasks(download_subtitles.give_me_subs())
+            summary, summary2 = ai_functions.splitting_tasks(all_text)
             session['summary'] = summary
             session['summary2'] = summary2
             time_stop = time.time()
             time_diff = time_stop - time_start
             print(time_diff)
-            if time_diff < float(13.8):
-                print(13.8 - time_diff, "sleeping")
-                time.sleep(13.8 - time_diff)
         except FileNotFoundError:
             return render_template('fail.html')
         return render_template('result.html', summary=summary, summary2=summary2, end_for_embed=end_for_embed)
