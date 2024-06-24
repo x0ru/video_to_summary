@@ -1,5 +1,7 @@
 function myFunction() {
+        let pro = 0;
   let y = document.getElementById("myDIV");
+  let zzz = document.getElementById("que").innerHTML;
   let x = document.getElementById("numb").value;
   let text;
   let result = x.includes("https://www.youtube.com/watch?");
@@ -9,34 +11,31 @@ function myFunction() {
     text = "Input not valid";
 
   } else {
+
   function make_request(){
         let request = new XMLHttpRequest();
         request.open("GET", "/track");
         request.send();
         request.onload = () => {
         var percentage_complete = parseInt(request.response);
-        console.log(percentage_complete);
+        document.getElementById("que").innerHTML = pro;
+        console.log(percentage_complete, 'this is from function');
+        if ( pro < 100) {
+
+        pro = pro + (1/percentage_complete);
+        changeProgress(pro);
+
         }
-
+        }
     }
-
+    setInterval(make_request, 125);
+    var percentage_complete = 1;
     text = "";
 
 
     y.style.display = "block";
-    /* change progress after 1 second (only for showcase) */
-    setTimeout(() => changeProgress(16), 1500);
-    setTimeout(() => changeProgress(23), 2600);
-    setTimeout(() => changeProgress(28), 4600);
-    setTimeout(() => changeProgress(28), 4600);
-    setTimeout(() => changeProgress(33), 5266);
-    setTimeout(() => changeProgress(39), 7200);
-    setTimeout(() => changeProgress(55), 9000);
-    setTimeout(() => make_request(), 9000);
-    setTimeout(() => changeProgress(69), 10500);
-    setTimeout(() => changeProgress(81), 12500);
-    setTimeout(() => make_request(), 12500);
-    setTimeout(() => changeProgress(100), 13200);
+
+
     document.getElementById('theForm').submit();
 
 

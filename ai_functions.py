@@ -1,5 +1,4 @@
 from openai import OpenAI
-import download_subtitles
 import os
 
 client = OpenAI(

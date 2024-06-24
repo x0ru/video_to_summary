@@ -9,9 +9,10 @@ import secrets
 
 
 # TODO: 1. Create history of searches. Last 3 searches can be stored in memory. << this maybe with point 5
-#       2. Do example so people can see random links for video.
-#       4. Progress bar.
-#       5. Account handling + db wit last searches ? So this way we can see history.
+#       4. Progress bar. - almsot done only figure how to return value from function
+#       2. translate ? should be easy
+#       3. OK java functrion has to be rewritten the way to be inside the one httop req. otherwise we cant do shit
+
 
 app = Flask(__name__)
 foo = secrets.token_urlsafe(16)
