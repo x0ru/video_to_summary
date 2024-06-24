@@ -20,15 +20,19 @@ function myFunction() {
         var percentage_complete = parseInt(request.response);
         document.getElementById("que").innerHTML = pro;
         console.log(percentage_complete, 'this is from function');
+        if (percentage_complete > 1) {
+        percentage_complete = percentage_complete + 1.4 + (percentage_complete * 0.3);
+        }
+        if (percentage_complete > 1 && pro < 86) {
+        document.getElementById("bar-description").innerHTML = "It is quite long video give us a bit more time";
+        }
         if ( pro < 100) {
-
         pro = pro + (1/percentage_complete);
         changeProgress(pro);
-
         }
-        }
+      }
     }
-    setInterval(make_request, 125);
+    setInterval(make_request, 120);
     var percentage_complete = 1;
     text = "";
 
@@ -54,7 +58,7 @@ const changeProgress = (progress) => {
   if (progress === 39) {
   document.getElementById("bar-description").innerHTML = 'Finding most important facts';
   }
-  if (progress === 69) {
+  if (progress > 86) {
   document.getElementById("bar-description").innerHTML = 'Final touch';
   }
 };
