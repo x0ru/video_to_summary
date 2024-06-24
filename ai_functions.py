@@ -67,3 +67,25 @@ def summary_key_points(split_text):
     text = response.choices[0].message.content
     return text
 
+def translate(language, text):
+    response = client.chat.completions.create(
+        model="gpt-3.5-turbo-0125",
+        messages=[
+            {"role": "system", "content": 'You are the best translator in the world. Can you translate this text into'
+                                          f'{language}'},
+            {"role": "user", "content": f'{text}'}
+        ]
+    )
+    text = response.choices[0].message.content
+    return text
+def translate_summary2(language, text):
+    response = client.chat.completions.create(
+        model="gpt-3.5-turbo-0125",
+        messages=[
+            {"role": "system", "content": 'You are the best translator in the world. Can you translate this text into'
+                                          f'{language}. Keep it in bullet points format always.'},
+            {"role": "user", "content": f'{text}'}
+        ]
+    )
+    text = response.choices[0].message.content
+    return text

@@ -23,4 +23,11 @@
 <p id="textbox2">{{ summary }}</p>
 <button onclick="copyText2()">Copy</button>
 
+<form  method="post" id="form-result">
+  {{ translate.csrf_token }}
+  {{ translate.languages }}
+    <p>Need translation ? No problem type desired language and press submit!</p>
+  <button type="button" onmousedown="fastSubmit();">Submit</button>
+ </form>
+
 {% endblock %}

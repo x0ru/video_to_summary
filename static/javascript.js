@@ -1,3 +1,7 @@
+function fastSubmit() {
+document.getElementById('form-result').submit();
+}
+
 function myFunction() {
         let pro = 0;
   let y = document.getElementById("myDIV");

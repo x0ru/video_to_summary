@@ -8,8 +8,7 @@ import download_subtitles
 import secrets
 
 
-# TODO: 1. Create history of searches. Last 3 searches can be stored in memory. << this maybe with point 5
-#       2. translate ? should be easy
+# TODO: 1. Create history of searches. Last 3 searches can be stored in memory.
 
 
 app = Flask(__name__)
@@ -20,6 +19,11 @@ csrf = CSRFProtect(app)
 
 class PasteVideo(FlaskForm):
     video_link = StringField('here link please', validators=[InputRequired()])
+    submit = SubmitField('Submit')
+
+
+class Languages(FlaskForm):
+    languages = StringField('Type language')
     submit = SubmitField('Submit')
 
 
@@ -43,38 +47,44 @@ def index():
         session['data'] = form.video_link.data
         session['end_for_embed'] = extracting_yt_link(session['data'])
         download_subtitles.download_sub(session["data"])
-        all_text, session['len_all_text'] = download_subtitles.give_me_subs()
+        try:
+            all_text, session['len_all_text'] = download_subtitles.give_me_subs()
+        except FileNotFoundError:
+            return render_template('fail.html')
         return redirect(url_for('result'))
     return render_template('index.html', form=form)
 
 
 @app.route("/track", methods=["GET"])
 def track():
-    print(session['len_all_text'], "this is one returning from function track")
     return str(session['len_all_text'])
 
 
 @app.route('/result', methods=['GET', 'POST'])
 def result():
     global all_text
+    translate = Languages()
+    if request.method == 'POST' and translate.validate_on_submit():
+        summary = ai_functions.translate(translate.languages.data, session['summary'])
+        summary2 = ai_functions.translate_summary2(translate.languages.data, session['summary2']).split('\n')
+        print(summary2)
+        return render_template('result.html', summary=summary, summary2=summary2,
+                               end_for_embed=session['end_for_embed'], translate=translate)
     if "data" in session.keys():
         try:
-            print(session['len_all_text'], "this is one returning from function result at the beginning of try")
-            time_start = time.time()
-            end_for_embed = session['end_for_embed']
             summary, summary2 = ai_functions.splitting_tasks(all_text)
             session['summary'] = summary
             session['summary2'] = summary2
-            time_stop = time.time()
-            time_diff = time_stop - time_start
-            print(time_diff)
+            print(summary2)
+            session.pop('data', None)
         except FileNotFoundError:
             return render_template('fail.html')
-        return render_template('result.html', summary=summary, summary2=summary2, end_for_embed=end_for_embed)
+        return render_template('result.html', summary=summary, summary2=summary2,
+                               end_for_embed=session['end_for_embed'], translate=translate)
     if "summary" in session.keys():
-        end_for_embed = session['end_for_embed']
+        print(session['summary'])
         return render_template('result.html', summary=session['summary'], summary2=session['summary2'],
-                               end_for_embed=end_for_embed)
+                               end_for_embed=session['end_for_embed'], translate=translate)
     else:
         return redirect(url_for('index'))
 
