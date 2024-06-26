@@ -1,8 +1,9 @@
 
 html,
 body {
-  height: 100%;
-  text-align: center;
+height: 100%;
+background: rgb(5,130,202);
+background: linear-gradient(0deg, rgba(5,130,202,0.14049369747899154) 9%, rgba(0,166,251,0.05085784313725494) 43%);
 }
 
 
@@ -15,15 +16,41 @@ body {
 .progress-container .progress {
   height: 100%;
   border-radius: 0.4rem;
-  background: #ff4754;
+  background: rgb(5,130,202);
+background: linear-gradient(90deg, rgba(5,130,202,1) 29%, rgba(0,166,251,1) 62%, rgba(0,53,84,1) 96%);
   transition: width 0.4s ease;
   width: 0;
 }
 
-
 #myDIV {
 display: none;
-margin: auto;
 text-align: center;
-width: 30%;
+width: 100%;
+}
+
+#form-bar-mid {
+margin-top: 15%;
+}
+
+#que{
+color: white;
+font-size: 15px;
+}
+
+
+#button-main {
+scale:1.1;
+width: 12.5% ;
+}
+
+
+header{
+height: 8%;
+background: rgb(5,130,202);
+background: linear-gradient(90deg, rgba(5,130,202,1) 29%, rgba(0,166,251,1) 62%, rgba(0,53,84,1) 96%);
+box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+#validation{
+color: red;
 }

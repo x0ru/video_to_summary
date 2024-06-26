@@ -2123,11 +2123,12 @@ progress {
   -webkit-appearance: none;
   -moz-appearance: none;
   appearance: none;
-  background-color: var(--bs-body-bg);
+   border-color: #00a6fb60;
   background-clip: padding-box;
   border: var(--bs-border-width) solid var(--bs-border-color);
   border-radius: var(--bs-border-radius);
-  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  box-shadow: 0 0 0 0.25rem  #00a6fb50;
+   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 }
 @media (prefers-reduced-motion: reduce) {
   .form-control {
@@ -2143,9 +2144,9 @@ progress {
 .form-control:focus {
   color: var(--bs-body-color);
   background-color: var(--bs-body-bg);
-  border-color: #86b7fe;
+  border-color: #00a6fb60;
   outline: 0;
-  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  box-shadow: 0 0 0 0.25rem  #00a6fb50;
 }
 .form-control::-webkit-date-and-time-value {
   min-width: 85px;
@@ -3054,16 +3055,17 @@ textarea.form-control-lg {
 }
 
 .btn-primary {
+
   --bs-btn-color: #fff;
-  --bs-btn-bg: #0d6efd;
-  --bs-btn-border-color: #0d6efd;
+  --bs-btn-bg: #006494;
+  --bs-btn-border-color: #006494;
   --bs-btn-hover-color: #fff;
-  --bs-btn-hover-bg: #0b5ed7;
-  --bs-btn-hover-border-color: #0a58ca;
+  --bs-btn-hover-bg: #00649496;
+  --bs-btn-hover-border-color: #00649470;
   --bs-btn-focus-shadow-rgb: 49, 132, 253;
   --bs-btn-active-color: #fff;
-  --bs-btn-active-bg: #0a58ca;
-  --bs-btn-active-border-color: #0a53be;
+  --bs-btn-active-bg: #00649470;
+  --bs-btn-active-border-color: #00649460;
   --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
   --bs-btn-disabled-color: #fff;
   --bs-btn-disabled-bg: #0d6efd;

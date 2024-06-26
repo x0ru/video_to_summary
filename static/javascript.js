@@ -12,7 +12,7 @@ function myFunction() {
   let result1 = x.includes("https://youtu.be");
 
   if ((result || result1) != true) {
-    text = "Input not valid";
+    text = "Please enter correct youtube link";
 
   } else {
 
@@ -25,7 +25,7 @@ function myFunction() {
         document.getElementById("que").innerHTML = pro;
         console.log(percentage_complete, 'this is from function');
         if (percentage_complete > 1) {
-        percentage_complete = percentage_complete + 1.4 + (percentage_complete * 0.3);
+        percentage_complete = percentage_complete + 1 + (percentage_complete * 0.25);
         }
         if (percentage_complete > 1 && pro < 86) {
         document.getElementById("bar-description").innerHTML = "It is quite long video give us a bit more time";
@@ -41,7 +41,7 @@ function myFunction() {
     text = "";
 
 
-    y.style.display = "block";
+    y.style.display = "flex";
 
 
     document.getElementById('theForm').submit();

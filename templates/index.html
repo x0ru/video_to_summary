@@ -2,19 +2,36 @@
 
 
 {% block content %}
- <form  method="post" id="theForm">
+<div class="container ">
+ <div class="text-center mt-5"><h1>Youtube summary in few seconds!</h1>
+ <h4>Any time for free.</h4>
+ </div>
+
+ <form method="post" id="theForm">
   {{ form.csrf_token }}
-  {{ form.video_link(id="numb")}}
-  <button type="button" onmousedown="myFunction();">Submit</button>
-  <p id="validation"></p>
+  <div class="row" id="form-bar-mid" >
+   <div class="col-2"></div>
+  <div class="col-6">
+  {{ form.video_link(id="numb", class="form-control", placeholder="Paste your Youtube link here")}}
+  </div>
+  <button class="btn btn-primary shadow" id="button-main" type="button" onmousedown="myFunction();">Submit</button>
+  </div>
+
+  <div class="row mt-2">
+   <div class="col-2"></div>
+  <div class="col-6 text-center">
+  <h5 id="validation"></h5>
+   </div></div>
  </form>
 
-<div id="myDIV">
+<div class="row mt-4" id="myDIV">
+ <div class="col-2"></div>
+  <div class="col-8 text-center">
 <h3 id="bar-description">We are processing your video</h3>
-<div class="progress-container" >
-  <div class="progress"></div>
+<div class="progress-container">
+  <div class="progress" id="que"></div>
 </div>
 </div>
-
-<p id="que">1</p>
+</div>
+ </div>
  {% endblock %}

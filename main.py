@@ -9,7 +9,7 @@ import secrets
 
 
 # TODO: 1. Create history of searches. Last 3 searches can be stored in memory.
-
+#          2. JS script going to work differnt way. We going to set up to 40% first part and when confirmation comes we weill change it to be more accurate.
 
 app = Flask(__name__)
 foo = secrets.token_urlsafe(16)
@@ -90,4 +90,4 @@ def result():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, port=5555)
