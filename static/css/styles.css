@@ -1,0 +1,207 @@
+:root {
+  --night: #0b090aff;
+  --eerie-black: #161a1dff;
+  --blood-red: #660708ff;
+  --cornell-red: #a4161aff;
+  --cornell-red-2: #ba181bff;
+  --imperial-red: #e5383bff;
+  --silver: #b1a7a6ff;
+  --timberwolf: #d3d3d3ff;
+  --white-smoke: #f5f3f4ff;
+  --white: #ffffffff;
+}
+
+body {
+  background-color: black;
+}
+
+.progress-container {
+  height: 1.4rem;
+  border-radius: 10px;
+  background: transparent;
+}
+
+.progress-container .progress {
+  height: 100%;
+  border-radius: 10px ;
+  background: rgb(102,7,8);
+background: linear-gradient(90deg, rgba(102,7,8,1) 0%, rgba(164,22,26,1) 53%, rgba(229,56,59,1) 100%);
+  transition: width 0.4s ease;
+  width: 100%;
+}
+
+#myDIV {
+display: none;
+text-align: center;
+width: 100vh;
+}
+
+#form-bar-mid {
+margin-top: 5%;
+}
+
+#que{
+color: white;
+font-size: 15px;
+}
+
+
+#button-main {
+scale:1.1;
+width: 12.5% ;
+}
+
+
+
+#validation{
+color: var(--cornell-red-2);
+  font-family: "Lato", sans-serif;
+}
+
+h2, h3, h4, h5, p {
+  font-family: "Source Code Pro", monospace;
+}
+
+h1, h3{
+  font-weight: 700;
+  letter-spacing: -1px;
+  font-family: "Lato", sans-serif;
+}
+
+p, h5{
+  font-family: "Lato", sans-serif;
+}
+
+h1, h2, h3, h4, h5, p{
+  color: var(--timberwolf);
+}
+
+
+#diff-color{
+  color: var(--cornell-red-2);
+}
+
+
+.logo-div{
+  width: 100vh;
+  margin-left: 2vh;
+  display: flex;
+  justify-content: left;
+  align-items: baseline;
+  font-family: "Lato", sans-serif;
+  text-shadow: -2px 2px 0px var(--blood-red),
+                -3px 3px 0px var(--cornell-red-2);
+
+  animation: roll-me 7s infinite;
+
+}
+
+
+
+@keyframes roll-me {
+
+  50%{
+  transform: scale(102%);
+    translate: 1%;
+  }
+  100%{
+    transform: scale(100%);
+  }
+}
+
+
+
+.logo-small{
+  color: var(--timberwolf);
+  font-size: 4vh;
+writing-mode: vertical-lr;
+  margin: 0;
+  border-left: 1px solid var(--timberwolf);
+}
+
+.logo{
+  color: var(--timberwolf);
+  font-size: 15vh;
+}
+
+.logo-i {
+  transform: translateX(-20%);
+}
+
+#myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100vh;
+  min-height: 100vh;
+  z-index: -1;
+}
+
+#myCard{
+  height: 40vh;
+}
+
+.card{
+  background-color: transparent;
+  backdrop-filter: blur(10px);
+  background-image: linear-gradient(
+    120deg,
+    #d3d3d330,
+    #00000020
+  );
+  border-radius: 50px;
+  border: 1px solid var(--eerie-black) ;
+}
+
+#card-left {
+
+  background-image: linear-gradient(
+          330deg,
+          #ffffff20,
+          #00000020
+  );
+  border: 1px solid var(--night);
+}
+#card-right {
+
+  background-image: linear-gradient(
+          30deg,
+          #ffffff20,
+          #00000020
+  );
+  border: 1px solid var(--night);
+}
+
+#card-bottom {
+
+
+  background-image: radial-gradient(farthest-corner at 50% 0%, #ffffff20, #00000020);
+  border: 1px solid var(--night);
+}
+
+.my-footer{
+  position: absolute;
+  bottom: 0;
+  right: 0;
+
+}
+
+.footer-text{
+  font-size: 3vh;
+}
+
+.display-none{
+  display: none;
+}
+
+#all-page{
+  background-color: var(--eerie-black);
+}
+
+.titles-card{
+  color: var(--cornell-red);
+  font-weight: 800;
+  font-family: "Source Code Pro", monospace;
+  letter-spacing: -1px;
+}
+

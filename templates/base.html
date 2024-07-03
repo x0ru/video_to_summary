@@ -3,19 +3,22 @@
 <meta charset="UTF-8">
 <title>Page Title</title>
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<link rel="stylesheet" href="static/styles.css">
-<link rel="stylesheet" href="static/bootstrap.css">
+<link rel="stylesheet" href="{{url_for('static', filename='css/bootstrap.css')}}">
+<link rel="stylesheet" href="{{url_for('static', filename='css/styles.css')}}">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
 
 
 
-    <header class="d-flex justify-content-center py-3">
-    </header>
 
 <body>
+
 {% block content %}
 {% endblock %}
-<script src="{{url_for('static', filename='javascript.js')}}"></script>
-<script src="{{url_for('static', filename='bootstrap.js')}}"></script>
+<script src="{{url_for('static', filename='js/scripts.js')}}"></script>
+<script src="{{url_for('static', filename='js/bootstrap.js')}}"></script>
 </body>
 
 

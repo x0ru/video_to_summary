@@ -38,11 +38,13 @@ def extracting_yt_link(link):
         end_for_embed = "dQw4w9WgXcQ"
     return end_for_embed
 
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     global all_text
     session['len_all_text'] = 1
     form = PasteVideo()
+
     if request.method == 'POST' and form.validate_on_submit():
         session['data'] = form.video_link.data
         session['end_for_embed'] = extracting_yt_link(session['data'])
@@ -90,4 +92,4 @@ def result():
 
 
 if __name__ == "__main__":
-    app.run(debug=True, port=5555)
+    app.run(debug=True)

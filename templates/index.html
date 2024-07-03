@@ -2,36 +2,59 @@
 
 
 {% block content %}
+
+<video autoplay muted loop id="myVideo">
+ <source src="{{ url_for('static', filename='assets/img/2611250-uhd_3840_2160_30fps.mp4') }}"
+         type="video/mp4">
+</video>
+<div class="logo-div">
+<h1 class="logo">A</h1><h1 class="logo-small">summ</h1><h1 class="logo logo-i">I</h1>
+</div>
 <div class="container ">
- <div class="text-center mt-5"><h1>Youtube summary in few seconds!</h1>
- <h4>Any time for free.</h4>
- </div>
+ <div class="row">
+  <div class="col-1"></div>
+<div class="col-10 card" id="myCard">
+ <div class="card-body" id="cardBody">
+   <div class="text-center">
+    <div id="top-card" class="mt-3">
+    <h1>YouTube videos summary in few seconds!</h1>
+    <div class="row">
+    <div class="col-6"></div>
+    <div class="col-5 d-flex justify-content-center">
+    <h4 class="lightest-green-color">Any time for&nbsp</h4><h4 id="diff-color">free</h4><h4>.</h4>
+    </div></div></div>
+  <form method="post" id="theForm">
+   {{ form.csrf_token }}
+   <div class="row" id="form-bar-mid" >
+    <div class="col-1"></div>
+    <div class="col-8">
+     {{ form.video_link(id="numb", class="form-control", placeholder="Paste your Youtube link here")}}
+    </div>
+    <button class="btn btn-primary" id="button-main" type="button" onmousedown="myFunction();">Sum up!</button>
+   </div>
 
- <form method="post" id="theForm">
-  {{ form.csrf_token }}
-  <div class="row" id="form-bar-mid" >
-   <div class="col-2"></div>
-  <div class="col-6">
-  {{ form.video_link(id="numb", class="form-control", placeholder="Paste your Youtube link here")}}
+   <div class="row mt-2">
+    <div class="col-2"></div>
+    <div class="col-6 text-center">
+     <h5 id="validation"></h5>
+    </div></div>
+  </form>
+  <div class="row" id="myDIV">
+   <div class="col-1"></div>
+   <div class="col-11 text-center">
+    <h3 id="bar-description">We are processing your video</h3>
+    <div class="progress-container">
+     <div class="progress" id="que"></div>
+    </div>
   </div>
-  <button class="btn btn-primary shadow" id="button-main" type="button" onmousedown="myFunction();">Submit</button>
-  </div>
-
-  <div class="row mt-2">
-   <div class="col-2"></div>
-  <div class="col-6 text-center">
-  <h5 id="validation"></h5>
-   </div></div>
- </form>
-
-<div class="row mt-4" id="myDIV">
- <div class="col-2"></div>
-  <div class="col-8 text-center">
-<h3 id="bar-description">We are processing your video</h3>
-<div class="progress-container">
-  <div class="progress" id="que"></div>
-</div>
+ </div>
 </div>
 </div>
  </div>
+ </div>
+</div>
+
+<div class="my-footer">
+ <h2 class=footer-text >@2024 Bartlomiej Sokol</h2>
+</div>
  {% endblock %}

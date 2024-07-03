@@ -2,32 +2,54 @@
 
 
 {% block content %}
-
+<div id="all-page">
 <a href="{{url_for('index')}}" >Index</a>
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/{{ end_for_embed }}" title="YouTube video player"
+<div class="container">
+    <div class="row">
+    <div class="card col-4 d-flex justify-content-center align-items-center rounded-bottom-0 rounded-end-0
+    rounded-top-4 "
+         id="card-left">
+<iframe width="370" height="200" src="https://www.youtube.com/embed/{{ end_for_embed }}" title="YouTube video player"
         frameborder="0"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         referrerpolicy="strict-origin-when-cross-origin"
         allowfullscreen></iframe>
+    </div>
 
-<div id="textbox">
-<h2> Title</h2>
-{% for line in summary2 %}
-<p>{{ line }}</p>
-{% endfor %}
+        <div class="card col-8 d-flex justify-content-center align-items-center rounded-bottom-0 rounded-top-4
+        rounded-end-4 rounded-start-0" id="card-right">
+            <div class="card-header">
+                <h2 class="titles-card">Summarization</h2>
+            </div>
+            <div class="card-body col-9">
+                <h5 id="textbox2">{{ summary }}</h5>
+                <button onclick="copyText2()">Copy</button>
+            </div>
+        </div>
+    </div>
+<div class="row">
+<div class="card col-12 d-flex justify-content-center align-items-center rounded-bottom-4 rounded-top-0" id="card-bottom">
+            <div class="col-9" id="textbox">
+                <div class="card-header text-center">
+                    <h2 class="titles-card">Key points</h2>
+                </div>
+                <div class="card-body">
+                    {% for line in summary2 %}
+                    <h5>{{ line }}</h5>
+                    {% endfor %}
+                </div>
+            </div>
+            <button onclick="copyText()">Copy</button>
+        </div>
 </div>
-<button onclick="copyText()">Copy</button>
-
-<h2> Title2</h2>
-<p id="textbox2">{{ summary }}</p>
-<button onclick="copyText2()">Copy</button>
-
 <form  method="post" id="form-result">
   {{ translate.csrf_token }}
   {{ translate.languages }}
     <p>Need translation ? No problem type desired language and press submit!</p>
   <button type="button" onmousedown="fastSubmit();">Submit</button>
  </form>
+
+</div>
+</div>
 
 {% endblock %}
