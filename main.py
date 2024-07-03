@@ -44,7 +44,6 @@ def index():
     global all_text
     session['len_all_text'] = 1
     form = PasteVideo()
-
     if request.method == 'POST' and form.validate_on_submit():
         session['data'] = form.video_link.data
         session['end_for_embed'] = extracting_yt_link(session['data'])
@@ -66,25 +65,44 @@ def track():
 def result():
     global all_text
     translate = Languages()
+
+    # This part is responsible for translation
     if request.method == 'POST' and translate.validate_on_submit():
         summary = ai_functions.translate(translate.languages.data, session['summary'])
         summary2 = ai_functions.translate_summary2(translate.languages.data, session['summary2']).split('\n')
+        for i in range(len(summary2)):
+            ite = 0
+            for letter in summary2[i]:
+                ite += 1
+                if letter == "-":
+                    summary2[i] = summary2[i][ite + 1:]
+                    break
         print(summary2)
         return render_template('result.html', summary=summary, summary2=summary2,
                                end_for_embed=session['end_for_embed'], translate=translate)
+
+    # This part is responsible for fetching data from index and sending them to ai api
     if "data" in session.keys():
         try:
             summary, summary2 = ai_functions.splitting_tasks(all_text)
             session['summary'] = summary
             session['summary2'] = summary2
-            print(summary2)
+            for i in range(len(summary2)):
+                ite = 0
+                for letter in summary2[i]:
+                    ite += 1
+                    if letter == "-":
+                        summary2[i] = summary2[i][ite + 1:]
+                        break
             session.pop('data', None)
         except FileNotFoundError:
             return render_template('fail.html')
         return render_template('result.html', summary=summary, summary2=summary2,
                                end_for_embed=session['end_for_embed'], translate=translate)
+
+    # This part is when we have results and only refresh the page
     if "summary" in session.keys():
-        print(session['summary'])
+        print(session['summary2'])
         return render_template('result.html', summary=session['summary'], summary2=session['summary2'],
                                end_for_embed=session['end_for_embed'], translate=translate)
     else:

@@ -55,12 +55,14 @@ def summary_key_points(split_text):
                                       "points. " "Based on the following text which is based on video, "
                                       "identify and list the main points that"
                                       " were"
-                                      " discussed or brought up. These should be the most important ideas, findings, "
+                                      " discussed or brought up."
+                                      "These should be the most important ideas, findings, "
                                       "or topics that are crucial to the essence of the discussion. Your goal is to"
                                       " provide a list that someone could read to quickly understand what was "
                                       "talked about. Don't include anything about sponsor of video and advertisement "
                                       "included in text. Don't mention it is based on text. "
-                                      "If you refer to it refer as in the video no in the text. "},
+                                      "If you refer to it refer as in the video no in the text. Don't use numbers and"
+                                      "hyphens in response."},
         {"role": "user", "content": f'{split_text}'}
       ]
     )
@@ -83,7 +85,8 @@ def translate_summary2(language, text):
         model="gpt-3.5-turbo-0125",
         messages=[
             {"role": "system", "content": 'You are the best translator in the world. Can you translate this text into'
-                                          f'{language}. Keep it in bullet points format always.'},
+                                          f'{language}. Keep it in bullet points format always. Do not use numbers and'
+                                          f'hyphen in response.'},
             {"role": "user", "content": f'{text}'}
         ]
     )

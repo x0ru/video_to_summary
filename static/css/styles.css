@@ -11,6 +11,10 @@
   --white: #ffffffff;
 }
 
+button{
+  background-color: transparent;
+}
+
 body {
   background-color: black;
 }
@@ -83,7 +87,6 @@ h1, h2, h3, h4, h5, p{
 
 
 .logo-div{
-  width: 100vh;
   margin-left: 2vh;
   display: flex;
   justify-content: left;
@@ -96,6 +99,9 @@ h1, h2, h3, h4, h5, p{
 
 }
 
+.width100{
+  width: 100vh;
+}
 
 
 @keyframes roll-me {
@@ -195,8 +201,10 @@ writing-mode: vertical-lr;
 }
 
 #all-page{
-  background-color: var(--eerie-black);
+  background-color: var(--night);
+  min-height: 100vh;
 }
+
 
 .titles-card{
   color: var(--cornell-red);
@@ -205,3 +213,32 @@ writing-mode: vertical-lr;
   letter-spacing: -1px;
 }
 
+.myHeader{
+  width: 100%;
+  background-color: transparent;
+  backdrop-filter: blur(20px);
+  background-image: linear-gradient(
+    120deg,
+    #a4161a50,
+    #66070850
+
+  );
+  border: 1px solid var(--eerie-black) ;
+}
+.myFooterResult{
+  width: 100%;
+  padding-top: 5vh;
+  background-color: transparent;
+  backdrop-filter: blur(20px);
+  background-image: linear-gradient(
+          120deg,
+          #a4161a50,
+          #66070850
+
+  );
+  border: 1px solid var(--eerie-black) ;
+}
+
+.reddish{
+  color: var(--cornell-red);
+}
