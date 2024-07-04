@@ -1,48 +1,47 @@
+
 function fastSubmit() {
 document.getElementById('form-result').submit();
+document.getElementById('formToHide').style.display = 'none';
+document.getElementById('hiddenFormSpinner').style.display = 'flex';
+document.getElementById('anotherToHide').style.display = 'flex';
 }
 
 function myFunction() {
         let pro = 0;
   let y = document.getElementById("myDIV");
-  let zzz = document.getElementById("que").innerHTML;
   let x = document.getElementById("numb").value;
   let text;
   let result = x.includes("https://www.youtube.com/watch?");
   let result1 = x.includes("https://youtu.be");
 
   if ((result || result1) != true) {
-    text = "Please enter correct youtube link";
+
+      text = "Please enter correct youtube link";
 
   } else {
 
   function make_request(){
-        let request = new XMLHttpRequest();
-        request.open("GET", "/track");
-        request.send();
-        request.onload = () => {
-        var percentage_complete = parseInt(request.response);
-        // document.getElementById("que").innerHTML = pro;
-        console.log(percentage_complete, 'this is from function');
-        if (percentage_complete > 1) {
-        percentage_complete = percentage_complete + 1 + (percentage_complete * 0.25);
+      console.log(pro)
+        pro += 1;
+        if (pro === 0) {
+            document.getElementById("bar-description").innerHTML = 'We are processing your video';
         }
-        if (percentage_complete > 1 && pro < 86) {
-        document.getElementById("bar-description").innerHTML = "It is quite long video give us a bit more time";
+        if (pro === 50) {
+            document.getElementById("bar-description").innerHTML = 'Finding most important facts';
         }
-        if ( pro < 100) {
-        pro = pro + (1/percentage_complete);
-        changeProgress(pro);
+        if (pro === 100) {
+            document.getElementById("bar-description").innerHTML = 'Let it cook';
         }
-      }
+        if (pro === 180) {
+            document.getElementById("bar-description").innerHTML = 'Video is quite long but we are getting there';
+        }
+        if (pro === 350) {
+            document.getElementById("bar-description").innerHTML = 'It should not take much longer';
+        }
     }
-    setInterval(make_request, 120);
-    let percentage_complete = 1;
-    text = "";
-
+    setInterval(make_request, 100);
 
     y.style.display = "flex";
-
 
     document.getElementById('theForm').submit();
     document.getElementById('top-card').classList.add('display-none');
@@ -53,44 +52,16 @@ function myFunction() {
 }
 
 
-const progressbar = document.querySelector(".progress");
-
-const changeProgress = (progress) => {
-  progressbar.style.width = `${progress}%`;
-  if (progress === 0) {
-  document.getElementById("bar-description").innerHTML = 'We are processing your video';
-  }
-  if (progress === 39) {
-  document.getElementById("bar-description").innerHTML = 'Finding most important facts';
-  }
-  if (progress > 86) {
-  document.getElementById("bar-description").innerHTML = 'Final touch';
-  }
-};
-
 
 function copyText() {
-
-            /* Select text area by id*/
-            var Text = document.getElementById("textbox").textContent;
-
-            /* Select the text inside text area. */
-            console.log(Text);
-            /* Copy selected text into clipboard */
-            navigator.clipboard.writeText(Text);
-
-        }
+    let Text = document.getElementById("textbox").textContent;
+    navigator.clipboard.writeText(Text);
+}
 
 function copyText2() {
+    let Text = document.getElementById("textbox2").textContent;
+    navigator.clipboard.writeText(Text);
+}
 
-            /* Select text area by id*/
-            var Text = document.getElementById("textbox2").textContent;
-
-            /* Select the text inside text area. */
-            console.log(Text);
-            /* Copy selected text into clipboard */
-            navigator.clipboard.writeText(Text);
-
-        }
 
 document.getElementById('myVideo').playbackRate = 0.5;

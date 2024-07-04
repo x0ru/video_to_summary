@@ -2130,7 +2130,20 @@ progress {
   box-shadow: 0 0 0 0.3rem  var(--eerie-black);
    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   background-color: var(--white-smoke);
+  text-align: center;
 }
+
+.form-control-1{
+  background-color: var(--night);
+  color: var(--cornell-red);
+  border: var(--bs-border-width) solid var(--night);
+  text-align: center;
+  box-shadow: 0 0 0 0.25rem var(--blood-red);
+  cursor: pointer;
+}
+
+
+
 @media (prefers-reduced-motion: reduce) {
   .form-control {
     transition: none;
@@ -2148,7 +2161,18 @@ progress {
   border-color: var(--silver);
   outline: 0;
   box-shadow: 0 0 0 0.2rem  var(--silver);
+  text-align: center;
 }
+
+
+.form-control-1:focus {
+  background-color: var(--night);
+  color: var(--white-smoke);
+  box-shadow: 0 0 0 0.25rem var(--cornell-red-2);
+  border: none;
+}
+
+
 .form-control::-webkit-date-and-time-value {
   min-width: 85px;
   height: 1.5em;
@@ -2163,7 +2187,10 @@ progress {
   opacity: 1;
 }
 .form-control::placeholder {
-  color: var(--bs-secondary-color);
+  color: var(--night);
+  font-family: "Lato", sans-serif;
+  font-weight: 700;
+  text-align: center;
   opacity: 1;
 }
 .form-control:disabled {
@@ -2337,10 +2364,11 @@ textarea.form-control-lg {
   border-color: #86b7fe;
   outline: 0;
   box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+  background-color: black;
 }
 .form-select[multiple], .form-select[size]:not([size="1"]) {
   padding-right: 0.75rem;
-  background-image: none;
+  background-color: black;
 }
 .form-select:disabled {
   background-color: var(--bs-secondary-bg);
@@ -3316,10 +3344,10 @@ textarea.form-control-lg {
   --bs-btn-border-width: 3px;
   --bs-btn-bg: var(--eerie-black);
   --bs-btn-color: var(--white-smoke);
-  --bs-btn-border-color: var(--night);
+  --bs-btn-border-color: var(--cornell-red);
   --bs-btn-hover-color: var(--white-smoke);
-  --bs-btn-hover-bg: var(--night);
-  --bs-btn-hover-border-color: var(--night);
+  --bs-btn-hover-bg: var(--cornell-red-2);
+  --bs-btn-hover-border-color: var(--cornell-red);
   --bs-btn-focus-shadow-rgb: 33, 37, 41;
   --bs-btn-active-color: var(--white-smoke);
   --bs-btn-active-bg: var(--night);

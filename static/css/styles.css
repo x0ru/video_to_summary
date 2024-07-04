@@ -31,7 +31,7 @@ body {
   background: rgb(102,7,8);
 background: linear-gradient(90deg, rgba(102,7,8,1) 0%, rgba(164,22,26,1) 53%, rgba(229,56,59,1) 100%);
   transition: width 0.4s ease;
-  width: 100%;
+  width: 0;
 }
 
 #myDIV {
@@ -80,8 +80,12 @@ h1, h2, h3, h4, h5, p{
   color: var(--timberwolf);
 }
 
+.second-line-index{
+  letter-spacing: -2px;
+}
 
-#diff-color{
+
+.diff-color{
   color: var(--cornell-red-2);
 }
 
@@ -227,7 +231,7 @@ writing-mode: vertical-lr;
 }
 .myFooterResult{
   width: 100%;
-  padding-top: 5vh;
+  padding-top: 2vh;
   background-color: transparent;
   backdrop-filter: blur(20px);
   background-image: linear-gradient(
@@ -239,6 +243,41 @@ writing-mode: vertical-lr;
   border: 1px solid var(--eerie-black) ;
 }
 
-.reddish{
+
+svg:hover {
+  transition-duration: 0.7s;
+  transform: scale(110%);
+}
+
+.shapes-6 {
+  width: 5vh;
+  height: 5vh;
   color: var(--cornell-red);
+  position: relative;
+  background:
+    linear-gradient(currentColor 0 0) center/100% 10px,
+    linear-gradient(currentColor 0 0) center/10px 100%;
+  background-repeat: no-repeat;
+}
+.shapes-6:before {
+  content:'';
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(currentColor 0 0) 0    0,
+    linear-gradient(currentColor 0 0) 100% 0,
+    linear-gradient(currentColor 0 0) 0    100%,
+    linear-gradient(currentColor 0 0) 100% 100%;
+  background-size:15.5px 15.5px;
+  background-repeat: no-repeat;
+  animation: sp6 1.5s infinite cubic-bezier(0.3,1,0,1);
+}
+@keyframes sp6 {
+   33%  {inset:-10px;transform: rotate(0deg)}
+   66%  {inset:-10px;transform: rotate(90deg)}
+   100% {inset:0    ;transform: rotate(90deg)}
+}
+
+#hiddenFormSpinner, #anotherToHide{
+  display: none;
 }
