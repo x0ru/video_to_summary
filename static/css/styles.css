@@ -19,22 +19,6 @@ body {
   background-color: black;
 }
 
-.progress-container {
-  height: 1.4rem;
-  border-radius: 10px;
-  background: transparent;
-}
-
-.progress-container .progress {
-  height: 100%;
-  border-radius: 10px ;
-  background: rgb(102,7,8);
-background: linear-gradient(90deg, rgba(102,7,8,1) 0%, rgba(164,22,26,1) 53%, rgba(229,56,59,1) 100%);
-  transition: width 0.4s ease;
-  width: 0;
-}
-
-
 #myDIV {
   display: none;
   flex-direction: column;
@@ -45,13 +29,6 @@ background: linear-gradient(90deg, rgba(102,7,8,1) 0%, rgba(164,22,26,1) 53%, rg
 #form-bar-mid {
 margin-top: 5%;
 }
-
-#que{
-color: white;
-font-size: 15px;
-}
-
-
 
 #validation{
 color: var(--cornell-red-2);
@@ -80,11 +57,9 @@ h1, h2, h3, h4, h5, p{
   letter-spacing: -2px;
 }
 
-
 .diff-color{
   color: var(--cornell-red-2);
 }
-
 
 .logo-div{
   margin-left: 2vh;
@@ -94,13 +69,10 @@ h1, h2, h3, h4, h5, p{
   font-family: "Lato", sans-serif;
   text-shadow: -2px 2px 0px var(--blood-red),
                 -3px 3px 0px var(--cornell-red-2);
-
   animation: roll-me 7s infinite;
-
 }
 
 @keyframes roll-me {
-
   50%{
   transform: scale(102%);
     translate: 1%;
@@ -109,8 +81,6 @@ h1, h2, h3, h4, h5, p{
     transform: scale(100%);
   }
 }
-
-
 
 .logo-small{
   color: var(--timberwolf);
@@ -155,7 +125,6 @@ writing-mode: vertical-lr;
 }
 
 #card-left {
-
   background-image: linear-gradient(
           330deg,
           #ffffff20,
@@ -163,8 +132,8 @@ writing-mode: vertical-lr;
   );
   border: 1px solid var(--night);
 }
-#card-right {
 
+#card-right {
   background-image: linear-gradient(
           30deg,
           #ffffff20,
@@ -174,8 +143,6 @@ writing-mode: vertical-lr;
 }
 
 #card-bottom {
-
-
   background-image: radial-gradient(farthest-corner at 50% 0%, #ffffff20, #00000020);
   border: 1px solid var(--night);
 }
@@ -184,11 +151,18 @@ writing-mode: vertical-lr;
   position: absolute;
   bottom: 0;
   right: 0;
+}
 
+.d-flexetc{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .footer-text{
   font-size: 3vh;
+  margin-bottom: 0;
+  padding-bottom: 8px;
 }
 
 .display-none{
@@ -221,7 +195,6 @@ writing-mode: vertical-lr;
   background-color: var(--eerie-black);
 }
 
-
 svg:hover {
   transition-duration: 0.7s;
   transform: scale(110%);
@@ -237,6 +210,7 @@ svg:hover {
     linear-gradient(currentColor 0 0) center/10px 100%;
   background-repeat: no-repeat;
 }
+
 .shapes-6:before {
   content:'';
   position: absolute;

@@ -124,6 +124,7 @@ def index():
         session['data'] = form.video_link.data
         session['end_for_embed'] = extracting_yt_link(session['data'])
         download_subtitles.download_sub(session["data"])
+
         try:
             all_text, session['len_all_text'] = download_subtitles.give_me_subs()
         except FileNotFoundError:
