@@ -20,7 +20,7 @@ def splitting_tasks(all_text):
 
 def summary_paragraph(split_text):
     response = client.chat.completions.create(
-        model="gpt-4o-mini",
+        model="gpt-3.5-turbo",
         temperature=0,
         messages=[
             {
@@ -49,7 +49,7 @@ def summary_paragraph(split_text):
 
 def summary_key_points(split_text):
     response = client.chat.completions.create(
-      model="gpt-4o-mini",
+      model="gpt-3.5-turbo-0125",
       messages=[
         {"role": "system", "content": "You are a proficient AI with a specialty in distilling information into key "
                                       "points. " "Based on the following text which is based on video, "
@@ -71,7 +71,7 @@ def summary_key_points(split_text):
 
 def translate(language, text):
     response = client.chat.completions.create(
-        model="gpt-4o-mini",
+        model="gpt-3.5-turbo-0125",
         messages=[
             {"role": "system", "content": 'You are the best translator in the world. Can you translate this text into'
                                           f'{language}'},
@@ -82,7 +82,7 @@ def translate(language, text):
     return text
 def translate_summary2(language, text):
     response = client.chat.completions.create(
-        model="gpt-4o-mini",
+        model="gpt-3.5-turbo-0125",
         messages=[
             {"role": "system", "content": 'You are the best translator in the world. Can you translate this text into'
                                           f'{language}. Keep it in bullet points format always. Do not use numbers and'

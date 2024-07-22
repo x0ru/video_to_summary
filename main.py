@@ -6,13 +6,14 @@ from wtforms.validators import InputRequired
 import ai_functions
 import download_subtitles
 import secrets
-from icecream import ic
 
 
+# TODO: 1. Create history of searches. Last 3 searches can be stored in memory.
+#          2. JS script going to work differnt way. We going to set up to 40% first part and when confirmation comes we weill change it to be more accurate.
 
 app = Flask(__name__)
 foo = secrets.token_urlsafe(16)
-app.secret_key = secrets.token_urlsafe()
+app.secret_key = 'gmbnvmmvm'
 csrf = CSRFProtect(app)
 
 
@@ -60,8 +61,7 @@ def index():
         try:
             all_text, session['len_all_text'] = download_subtitles.give_me_subs()
         except FileNotFoundError:
-            flash("We can't process this video. Try different one.")
-            return redirect(url_for('index'))
+            return render_template('fail.html')
         return redirect(url_for('result'))
     return render_template('index.html', form=form)
 
@@ -80,6 +80,14 @@ def result():
     if request.method == 'POST' and translate.validate_on_submit():
         summary = ai_functions.translate(translate.languages.data, session['summary'])
         summary2 = ai_functions.translate_summary2(translate.languages.data, session['summary2']).split('\n')
+        for i in range(len(summary2)):
+            ite = 0
+            for letter in summary2[i]:
+                ite += 1
+                if letter == "-":
+                    summary2[i] = summary2[i][ite + 1:]
+                    break
+        print(summary2)
         return render_template('result.html', summary=summary, summary2=summary2,
                                end_for_embed=session['end_for_embed'], translate=translate)
 
@@ -89,11 +97,16 @@ def result():
             summary, summary2 = ai_functions.splitting_tasks(all_text)
             session['summary'] = summary
             session['summary2'] = summary2
-            ic(summary2)
+            for i in range(len(summary2)):
+                ite = 0
+                for letter in summary2[i]:
+                    ite += 1
+                    if letter == "-":
+                        summary2[i] = summary2[i][ite + 1:]
+                        break
             session.pop('data', None)
         except FileNotFoundError:
-            flash("We can't process this video. Try different one.")
-            return redirect(url_for('index'))
+            return render_template('fail.html')
         return render_template('result.html', summary=summary, summary2=summary2,
                                end_for_embed=session['end_for_embed'], translate=translate)
 
