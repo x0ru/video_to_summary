@@ -46,7 +46,6 @@ function myFunction() {
     document.getElementById('theForm').submit();
     document.getElementById('top-card').classList.add('display-none');
     document.getElementById('theForm').classList.add('display-none');
-    document.getElementById('cardBody').classList.add('d-flex', 'align-items-center');
   }
   document.getElementById("validation").innerHTML = text;
 }
