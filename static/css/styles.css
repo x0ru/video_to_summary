@@ -20,14 +20,23 @@ body {
 }
 
 #myDIV {
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+display: none;
+text-align: center;
+width: 100vh;
 }
 
 #form-bar-mid {
 margin-top: 5%;
+}
+
+#que{
+color: white;
+font-size: 15px;
+}
+
+#button-main {
+scale:1.1;
+width: 12.5% ;
 }
 
 #validation{
@@ -72,6 +81,11 @@ h1, h2, h3, h4, h5, p{
   animation: roll-me 7s infinite;
 }
 
+.width100{
+  width: 100vh;
+}
+
+
 @keyframes roll-me {
   50%{
   transform: scale(102%);
@@ -103,7 +117,7 @@ writing-mode: vertical-lr;
   position: fixed;
   right: 0;
   bottom: 0;
-  min-width: 100vw;
+  min-width: 100vh;
   min-height: 100vh;
   z-index: -1;
 }
@@ -184,15 +198,28 @@ writing-mode: vertical-lr;
 
 .myHeader{
   width: 100%;
-  background-color: var(--eerie-black);
+  background-color: transparent;
   backdrop-filter: blur(20px);
+  background-image: linear-gradient(
+    120deg,
+    #a4161a50,
+    #66070850
+
+  );
+  border: 1px solid var(--eerie-black) ;
 }
-
-
 .myFooterResult{
   width: 100%;
   padding-top: 2vh;
-  background-color: var(--eerie-black);
+  background-color: transparent;
+  backdrop-filter: blur(20px);
+  background-image: linear-gradient(
+          120deg,
+          #a4161a50,
+          #66070850
+
+  );
+  border: 1px solid var(--eerie-black) ;
 }
 
 svg:hover {
@@ -224,7 +251,6 @@ svg:hover {
   background-repeat: no-repeat;
   animation: sp6 1.5s infinite cubic-bezier(0.3,1,0,1);
 }
-
 @keyframes sp6 {
    33%  {inset:-10px;transform: rotate(0deg)}
    66%  {inset:-10px;transform: rotate(90deg)}
