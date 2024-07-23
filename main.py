@@ -1,3 +1,4 @@
+import os
 import time
 from flask import Flask, render_template, redirect, flash, url_for, session, request
 from wtforms import SubmitField, StringField, SelectField
@@ -9,8 +10,7 @@ import secrets
 from icecream import ic
 
 app = Flask(__name__)
-foo = secrets.token_urlsafe(16)
-app.secret_key = secrets.token_urlsafe()
+app.secret_key = os.environ.get('SECRET_KEY')
 csrf = CSRFProtect(app)
 
 
@@ -20,84 +20,18 @@ class PasteVideo(FlaskForm):
 
 
 class Languages(FlaskForm):
-    languages = SelectField(choices=["Choose language ▼",
-                                     "Afrikaans",
-                                       "Arabic",
-                                       "Bengali",
-                                       "Bulgarian",
-                                       "Catalan",
-                                       "Cantonese",
-                                       "Croatian",
-                                       "Czech",
-                                       "Danish",
-                                       "Dutch",
-                                       "Lithuanian",
-                                       "Malay",
-                                       "Malayalam",
-                                       "Panjabi",
-                                       "Tamil",
-                                       "English",
-                                       "Finnish",
-                                       "French",
-                                       "German",
-                                       "Greek",
-                                       "Hebrew",
-                                       "Hindi",
-                                       "Hungarian",
-                                       "Indonesian",
-                                       "Italian",
-                                       "Japanese",
-                                       "Javanese",
-                                       "Korean",
-                                       "Norwegian",
-                                       "Polish",
-                                       "Portuguese",
-                                       "Romanian",
-                                       "Russian",
-                                       "Serbian",
-                                       "Slovak",
-                                       "Slovene",
-                                       "Spanish",
-                                       "Swedish",
-                                       "Telugu",
-                                       "Thai",
-                                       "Turkish",
-                                       "Ukrainian",
-                                       "Vietnamese",
-                                       "Welsh",
-                                       "Sign language",
-                                       "Algerian",
-                                       "Aramaic",
-                                       "Armenian",
-                                       "Berber",
-                                       "Burmese",
-                                       "Bosnian",
-                                       "Brazilian",
-                                       "Bulgarian",
-                                       "Cypriot",
-                                       "Corsica",
-                                       "Creole",
-                                       "Scottish",
-                                       "Egyptian",
-                                       "Esperanto",
-                                       "Estonian",
-                                       "Finn",
-                                       "Flemish",
-                                       "Georgian",
-                                       "Hawaiian",
-                                       "Indonesian",
-                                       "Inuit",
-                                       "Irish",
-                                       "Icelandic",
-                                       "Latin",
-                                       "Mandarin",
-                                       "Nepalese",
-                                       "Sanskrit",
-                                       "Tagalog",
-                                       "Tahitian",
-                                       "Tibetan",
-                                       "Gypsy",
-                                       "Wu"])
+    languages = SelectField(choices=["Choose language ▼", "Afrikaans","Arabic","Bengali","Bulgarian",
+                                     "Catalan","Cantonese","Croatian","Czech","Danish","Dutch","Lithuanian",
+                                     "Malay","Malayalam","Panjabi","Tamil","English","Finnish","French","German",
+                                     "Greek","Hebrew","Hindi","Hungarian","Indonesian","Italian","Japanese",
+                                     "Javanese","Korean","Norwegian","Polish","Portuguese","Romanian","Russian",
+                                     "Serbian","Slovak","Slovene","Spanish","Swedish","Telugu","Thai","Turkish",
+                                     "Ukrainian","Vietnamese","Welsh","Signlanguage","Algerian","Aramaic","Armenian",
+                                     "Berber","Burmese","Bosnian","Brazilian","Bulgarian","Cypriot","Corsica",
+                                     "Creole","Scottish","Egyptian","Esperanto","Estonian","Finn","Flemish",
+                                     "Georgian","Hawaiian","Indonesian","Inuit","Irish","Icelandic","Latin",
+                                     "Mandarin","Nepalese","Sanskrit","Tagalog","Tahitian","Tibetan","Gypsy","Wu"
+                                     ])
     submit = SubmitField('Submit')
 
 

@@ -81,7 +81,9 @@
                 </div>
                 <div class="card-body mb-4">
                     {% for line in summary2 %}
+                    {% if line != "" %}
                     <h5>► {{ line }}</h5>
+                    {% endif %}
                     {% endfor %}
                 </div>
             </div>
