@@ -1,13 +1,11 @@
 import os
-import time
 from flask import Flask, render_template, redirect, flash, url_for, session, request
 from wtforms import SubmitField, StringField, SelectField
 from flask_wtf import FlaskForm, CSRFProtect
 from wtforms.validators import InputRequired
 import ai_functions
 import download_subtitles
-import secrets
-from icecream import ic
+
 
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY')
