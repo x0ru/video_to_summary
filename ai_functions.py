@@ -1,10 +1,7 @@
 from openai import OpenAI
 import os
 
-client = OpenAI(
-    # defaults to os.environ.get("OPENAI_API_KEY")
-    # api_key="My API Key",
-)
+client = OpenAI()
 
 
 def splitting_tasks(all_text):

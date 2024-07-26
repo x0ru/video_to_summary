@@ -35,7 +35,8 @@ class Languages(FlaskForm):
     submit = SubmitField('Submit')
 
 
-all_text =[]
+all_text = []
+
 
 def extracting_yt_link(link):
     if 'https://www.youtube.com/watch?v=' in link:
@@ -65,11 +66,6 @@ def index():
     return render_template('index.html', form=form)
 
 
-@app.route("/track", methods=["GET"])
-def track():
-    return str(session['len_all_text'])
-
-
 @app.route('/result', methods=['GET', 'POST'])
 def result():
     global all_text
@@ -79,6 +75,10 @@ def result():
     if request.method == 'POST' and translate.validate_on_submit():
         summary = ai_functions.translate(translate.languages.data, session['summary'])
         summary2 = ai_functions.translate_summary2(translate.languages.data, session['summary2']).split('\n')
+        # Handling situation when bullet point start with hyphen/ get rid of them /use arrow in html template
+        for i in range(len(summary2)):
+            if summary2[i][:1] == '-':
+                summary2[i] = summary2[i][2:]
         return render_template('result.html', summary=summary, summary2=summary2,
                                end_for_embed=session['end_for_embed'], translate=translate)
 
@@ -88,7 +88,6 @@ def result():
             summary, summary2 = ai_functions.splitting_tasks(all_text)
             session['summary'] = summary
             session['summary2'] = summary2
-            ic(summary2)
             session.pop('data', None)
         except FileNotFoundError:
             flash("We can't process this video. Try different one.")
@@ -98,7 +97,6 @@ def result():
 
     # This part is when we have results and only refresh the page
     if "summary" in session.keys():
-        print(session['summary2'])
         return render_template('result.html', summary=session['summary'], summary2=session['summary2'],
                                end_for_embed=session['end_for_embed'], translate=translate)
     else:
