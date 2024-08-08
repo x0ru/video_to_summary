@@ -6,15 +6,15 @@ def download_sub(url):
     url = f"{url}"
     ydl_opts = {
       'writeautomaticsub': True,
-      'subtitlesformat': 'srt',
+      'subtitlesformat': 'vtt',
       'skip_download': True,
       'outtmpl': 'sub.srt'
     }
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         try:
             ydl.download([url])
-        except:
-            return False
+        except Exception as e:
+            print(e)
 
 
 def give_me_subs():
